@@ -15,7 +15,7 @@
         body {
             font-family: 'Outfit', sans-serif;
             min-height: 100vh;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background: linear-gradient(135deg, #1a1209 0%, #2d1f0f 50%, #3d2a14 100%);
             background-attachment: fixed;
             color: #ffffff;
             line-height: 1.6;
@@ -36,42 +36,41 @@
         .orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.4;
-            animation: float 20s ease-in-out infinite;
+            filter: blur(100px);
+            opacity: 0.3;
+            animation: float 25s ease-in-out infinite;
         }
 
         .orb-1 {
-            width: 500px;
-            height: 500px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            top: -150px;
-            right: -100px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #f97316, #ea580c);
+            top: -200px;
+            right: -150px;
         }
 
         .orb-2 {
             width: 400px;
             height: 400px;
-            background: linear-gradient(135deg, #f093fb, #f5576c);
+            background: radial-gradient(circle, #fb923c, #f97316);
             bottom: -100px;
             left: -100px;
-            animation-delay: -5s;
+            animation-delay: -8s;
         }
 
         .orb-3 {
             width: 300px;
             height: 300px;
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation-delay: -10s;
+            background: radial-gradient(circle, #fdba74, #fb923c);
+            top: 40%;
+            left: 60%;
+            animation-delay: -15s;
         }
 
         @keyframes float {
             0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -30px) scale(1.05); }
-            66% { transform: translate(-20px, 20px) scale(0.95); }
+            33% { transform: translate(40px, -40px) scale(1.05); }
+            66% { transform: translate(-30px, 30px) scale(0.95); }
         }
 
         /* Container */
@@ -85,12 +84,12 @@
 
         /* Glassmorphism Card */
         .glass {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(249, 115, 22, 0.15);
             border-radius: 24px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
         }
 
         /* Header */
@@ -109,26 +108,30 @@
         .brand-icon {
             width: 56px;
             height: 56px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #f97316, #ea580c);
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 28px;
-            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 8px 24px rgba(249, 115, 22, 0.4);
         }
 
         .brand-name {
             font-size: 32px;
             font-weight: 700;
-            background: linear-gradient(135deg, #667eea, #f093fb);
+            color: #fff;
+        }
+
+        .brand-name span {
+            background: linear-gradient(135deg, #fb923c, #f97316, #ea580c);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         header p {
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.6);
             font-size: 16px;
         }
 
@@ -141,9 +144,9 @@
         }
 
         .tool {
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.04);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(249, 115, 22, 0.1);
             border-radius: 20px;
             padding: 28px 24px;
             cursor: pointer;
@@ -152,20 +155,20 @@
         }
 
         .tool:hover {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(249, 115, 22, 0.08);
+            border-color: rgba(249, 115, 22, 0.3);
             transform: translateY(-4px);
         }
 
         .tool.active {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
-            border-color: rgba(102, 126, 234, 0.5);
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.15), rgba(234, 88, 12, 0.15));
+            border-color: rgba(249, 115, 22, 0.4);
         }
 
         .tool-icon {
             width: 56px;
             height: 56px;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.4), rgba(118, 75, 162, 0.4));
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.3), rgba(234, 88, 12, 0.3));
             border-radius: 16px;
             display: flex;
             align-items: center;
@@ -202,8 +205,8 @@
 
         .form-title span {
             font-size: 12px;
-            background: rgba(102, 126, 234, 0.3);
-            color: #a5b4fc;
+            background: rgba(249, 115, 22, 0.2);
+            color: #fdba74;
             padding: 6px 14px;
             border-radius: 20px;
             font-weight: 500;
@@ -237,7 +240,7 @@
             width: 100%;
             padding: 14px 16px;
             background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(249, 115, 22, 0.15);
             border-radius: 12px;
             color: #ffffff;
             font-family: inherit;
@@ -254,9 +257,9 @@
         .form-group textarea:focus,
         .form-group select:focus {
             outline: none;
-            border-color: rgba(102, 126, 234, 0.6);
+            border-color: rgba(249, 115, 22, 0.6);
             background: rgba(0, 0, 0, 0.4);
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
         }
 
         .form-group textarea {
@@ -281,7 +284,7 @@
         .btn {
             width: 100%;
             padding: 18px 24px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #f97316, #ea580c);
             color: #ffffff;
             border: none;
             border-radius: 14px;
@@ -299,7 +302,7 @@
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 32px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 12px 32px rgba(249, 115, 22, 0.4);
         }
 
         .btn:disabled {
@@ -316,7 +319,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(26, 26, 46, 0.9);
+            background: rgba(26, 18, 9, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
             align-items: center;
@@ -332,8 +335,8 @@
         .loading-spinner {
             width: 50px;
             height: 50px;
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            border-top-color: #667eea;
+            border: 3px solid rgba(249, 115, 22, 0.2);
+            border-top-color: #f97316;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
@@ -364,7 +367,7 @@
             align-items: center;
             padding: 18px 24px;
             background: rgba(0, 0, 0, 0.2);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(249, 115, 22, 0.15);
         }
 
         .result-header span {
@@ -382,10 +385,10 @@
 
         .btn-sm {
             padding: 10px 18px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(249, 115, 22, 0.1);
+            border: 1px solid rgba(249, 115, 22, 0.25);
             border-radius: 10px;
-            color: #ffffff;
+            color: #fdba74;
             font-size: 13px;
             font-weight: 500;
             cursor: pointer;
@@ -396,22 +399,100 @@
         }
 
         .btn-sm:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.25);
+            background: rgba(249, 115, 22, 0.2);
+            border-color: rgba(249, 115, 22, 0.4);
         }
 
         .result-body {
             padding: 28px;
             max-height: 500px;
             overflow-y: auto;
-            font-family: 'Space Mono', monospace;
-            font-size: 13px;
-            line-height: 1.9;
-            white-space: pre-wrap;
-            color: rgba(255, 255, 255, 0.85);
             background: rgba(0, 0, 0, 0.15);
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.85);
         }
 
+        /* Table Styles in Result */
+        .result-body table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 16px 0;
+            font-size: 13px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .result-body th, .result-body td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid rgba(249, 115, 22, 0.1);
+        }
+
+        .result-body th {
+            background: rgba(249, 115, 22, 0.15);
+            color: #fdba74;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .result-body tr:last-child td {
+            border-bottom: none;
+        }
+
+        .result-body tr:hover td {
+            background: rgba(249, 115, 22, 0.05);
+        }
+
+        .result-body td {
+            vertical-align: top;
+        }
+
+        /* Headers in result */
+        .result-body h1,
+        .result-body h2,
+        .result-body h3 {
+            color: #fff;
+            margin: 20px 0 10px 0;
+            font-weight: 600;
+        }
+
+        .result-body h1 { font-size: 20px; color: #fb923c; }
+        .result-body h2 { font-size: 17px; color: #fdba74; }
+        .result-body h3 { font-size: 15px; }
+
+        /* Lists */
+        .result-body ul, .result-body ol {
+            margin: 10px 0;
+            padding-left: 24px;
+        }
+
+        .result-body li {
+            margin: 6px 0;
+        }
+
+        /* Code/Pre */
+        .result-body pre, .result-body code {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 6px;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+        }
+
+        .result-body pre {
+            padding: 16px;
+            overflow-x: auto;
+        }
+
+        .result-body code {
+            padding: 2px 6px;
+        }
+
+        /* Scrollbar */
         .result-body::-webkit-scrollbar {
             width: 6px;
         }
@@ -421,7 +502,7 @@
         }
 
         .result-body::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(249, 115, 22, 0.3);
             border-radius: 3px;
         }
 
@@ -430,7 +511,7 @@
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #f97316, #ea580c);
             color: #ffffff;
             padding: 14px 24px;
             border-radius: 12px;
@@ -439,7 +520,7 @@
             display: none;
             animation: slideIn 0.3s ease;
             z-index: 1001;
-            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 8px 24px rgba(249, 115, 22, 0.4);
         }
 
         .toast.show {
@@ -460,7 +541,7 @@
         }
 
         footer a {
-            color: #a5b4fc;
+            color: #fb923c;
             text-decoration: none;
         }
 
@@ -485,6 +566,18 @@
             .container {
                 padding: 40px 16px;
             }
+
+            .result-body {
+                font-size: 13px;
+            }
+
+            .result-body table {
+                font-size: 12px;
+            }
+
+            .result-body th, .result-body td {
+                padding: 8px 10px;
+            }
         }
     </style>
 </head>
@@ -500,7 +593,7 @@
         <header>
             <div class="brand">
                 <div class="brand-icon">🎯</div>
-                <span class="brand-name">AtapDigital</span>
+                <span class="brand-name">Atap<span>Digital</span></span>
             </div>
             <p>AI Toolkit untuk Social Media — Riset, Caption & Ide Konten</p>
         </header>
@@ -662,6 +755,66 @@ Likes: 8000 | Comments: 400 | Saves: 200 | Format: Reels"></textarea>
         let generatedResult = '';
         let currentBrand = '';
 
+        // Markdown-like parser for display
+        function parseMarkdown(text) {
+            let html = text;
+
+            // Convert markdown tables to HTML
+            const tableRegex = /\|(.+)\|\n\|[-| ]+\|\n((?:\|.+\|\n?)+)/g;
+            html = html.replace(tableRegex, (match, header, body) => {
+                const headers = header.split('|').filter(h => h.trim()).map(h => h.trim());
+                const rows = body.trim().split('\n').map(row =>
+                    row.split('|').filter(c => c.trim()).map(c => c.trim())
+                );
+
+                let tableHtml = '<table>';
+                tableHtml += '<thead><tr>';
+                headers.forEach(h => {
+                    tableHtml += `<th>${h}</th>`;
+                });
+                tableHtml += '</tr></thead><tbody>';
+                rows.forEach(row => {
+                    tableHtml += '<tr>';
+                    row.forEach(cell => {
+                        tableHtml += `<td>${cell}</td>`;
+                    });
+                    tableHtml += '</tr>';
+                });
+                tableHtml += '</tbody></table>';
+                return tableHtml;
+            });
+
+            // Convert headers
+            html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+            html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+            html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+
+            // Convert bold
+            html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+
+            // Convert inline code
+            html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+            // Convert lists
+            html = html.replace(/^- (.+)$/gm, '<li>$1</li>');
+            html = html.replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>');
+
+            // Convert numbered lists
+            html = html.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
+
+            // Convert line breaks
+            html = html.replace(/\n\n/g, '</p><p>');
+            html = '<p>' + html + '</p>';
+            html = html.replace(/<p><\/p>/g, '');
+
+            // Clean up empty paragraphs
+            html = html.replace(/<p>\s*<\/p>/g, '');
+            html = html.replace(/<p>(<[hul])/g, '$1');
+            html = html.replace(/(<\/[hul][^>]*>)<\/p>/g, '$1');
+
+            return html;
+        }
+
         // Tool switching
         document.querySelectorAll('.tool').forEach(tool => {
             tool.addEventListener('click', function() {
@@ -751,7 +904,10 @@ Likes: 8000 | Comments: 400 | Saves: 200 | Format: Reels"></textarea>
             loading.classList.remove('show');
             btn.disabled = false;
             resultCard.classList.add('show');
-            document.getElementById('result-content').textContent = generatedResult;
+
+            // Parse and render markdown
+            const resultContent = document.getElementById('result-content');
+            resultContent.innerHTML = parseMarkdown(generatedResult);
         }
 
         function copyResult() {
@@ -766,6 +922,8 @@ Likes: 8000 | Comments: 400 | Saves: 200 | Format: Reels"></textarea>
                 month: 'long',
                 day: 'numeric'
             });
+
+            const parsedHtml = parseMarkdown(generatedResult);
 
             const printWindow = window.open('', '_blank');
             printWindow.document.write(`
@@ -789,12 +947,12 @@ Likes: 8000 | Comments: 400 | Saves: 200 | Format: Reels"></textarea>
             text-align: center;
             margin-bottom: 40px;
             padding-bottom: 30px;
-            border-bottom: 3px solid #667eea;
+            border-bottom: 3px solid #f97316;
         }
         .logo {
             font-size: 32px;
             font-weight: 700;
-            color: #667eea;
+            color: #f97316;
             margin-bottom: 8px;
         }
         .subtitle {
@@ -803,8 +961,8 @@ Likes: 8000 | Comments: 400 | Saves: 200 | Format: Reels"></textarea>
         }
         .badge {
             display: inline-block;
-            background: #f3f4f6;
-            color: #667eea;
+            background: #fff7ed;
+            color: #ea580c;
             padding: 8px 20px;
             border-radius: 25px;
             font-size: 13px;
@@ -814,11 +972,11 @@ Likes: 8000 | Comments: 400 | Saves: 200 | Format: Reels"></textarea>
             letter-spacing: 0.5px;
         }
         .meta {
-            background: #f9fafb;
+            background: #fff7ed;
             padding: 20px 25px;
             border-radius: 12px;
             margin-bottom: 30px;
-            border-left: 4px solid #667eea;
+            border-left: 4px solid #f97316;
         }
         .meta p {
             font-size: 14px;
@@ -828,29 +986,61 @@ Likes: 8000 | Comments: 400 | Saves: 200 | Format: Reels"></textarea>
             color: #1a1a2e;
         }
         .content {
-            font-family: 'Segoe UI', sans-serif;
             font-size: 14px;
-            line-height: 1.9;
-            white-space: pre-wrap;
-            word-wrap: break-word;
+            line-height: 1.8;
             color: #374151;
+        }
+        .content h1, .content h2, .content h3 {
+            color: #1a1a2e;
+            margin: 20px 0 10px 0;
+        }
+        .content h1 { font-size: 20px; color: #ea580c; }
+        .content h2 { font-size: 17px; }
+        .content h3 { font-size: 15px; }
+        .content p {
+            margin: 10px 0;
+        }
+        .content ul, .content ol {
+            margin: 10px 0;
+            padding-left: 24px;
+        }
+        .content li {
+            margin: 6px 0;
+        }
+        .content strong {
+            color: #1a1a2e;
+        }
+        .content code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
         }
         /* Table Styles */
         .content table {
             border-collapse: collapse;
             width: 100%;
-            margin: 15px 0;
+            margin: 20px 0;
             font-size: 13px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
         }
         .content th, .content td {
-            border: 1px solid #e5e7eb;
-            padding: 10px 14px;
+            padding: 12px 16px;
             text-align: left;
+            border-bottom: 1px solid #e5e7eb;
         }
         .content th {
-            background: #f3f4f6;
+            background: #fff7ed;
+            color: #ea580c;
             font-weight: 600;
-            color: #1a1a2e;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .content tr:last-child td {
+            border-bottom: none;
         }
         .content tr:nth-child(even) {
             background: #f9fafb;
@@ -866,6 +1056,7 @@ Likes: 8000 | Comments: 400 | Saves: 200 | Format: Reels"></textarea>
         @media print {
             body { padding: 30px 40px; }
             .badge { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+            .content th { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
         }
     </style>
 </head>
@@ -878,7 +1069,7 @@ Likes: 8000 | Comments: 400 | Saves: 200 | Format: Reels"></textarea>
     <div class="meta">
         <p><strong>Tanggal:</strong> ${formattedDate}</p>
     </div>
-    <div class="content">${generatedResult}</div>
+    <div class="content">${parsedHtml}</div>
     <div class="footer">
         Made with ❤️ by AtapDigital · agnimiftahfauza@gmail.com
     </div>
