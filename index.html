@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AtapDigital AI - Social Media Toolkit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .menu-item {
+            background: #f8f9fa;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .menu-item:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .menu-item.active {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+
+        .menu-item .icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .menu-item h3 {
+            font-size: 1em;
+            margin-bottom: 5px;
+        }
+
+        .menu-item p {
+            font-size: 0.85em;
+            opacity: 0.7;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .form-group small {
+            display: block;
+            margin-top: 5px;
+            color: #666;
+            font-size: 0.85em;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .result-header h3 {
+            color: #333;
+        }
+
+        .result-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9em;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-copy {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-download {
+            background: #667eea;
+            color: white;
+        }
+
+        .result-content {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            white-space: pre-wrap;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9em;
+            max-height: 500px;
+            overflow-y: auto;
+            line-height: 1.6;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 30px;
+            opacity: 0.8;
+        }
+
+        .footer a {
+            color: white;
+        }
+
+        .section-title {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .posts-help {
+            background: #fff3cd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+
+        .posts-help strong {
+            color: #856404;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            display: none;
+            animation: slideIn 0.3s;
+        }
+
+        .toast.show {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 AtapDigital AI Toolkit</h1>
+            <p>AI-Powered Social Media Tools untuk Riset, Strategi & Konten</p>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">📋 Pilih Tools</h2>
+
+            <div class="menu">
+                <div class="menu-item active" data-tool="competitor">
+                    <div class="icon">📊</div>
+                    <h3>Analisis Kompetitor</h3>
+                    <p>Analyse strategy & content competitor</p>
+                </div>
+                <div class="menu-item" data-tool="caption">
+                    <div class="icon">✍️</div>
+                    <h3>Variasi Caption</h3>
+                    <p>Generate caption siap pakai</p>
+                </div>
+                <div class="menu-item" data-tool="ideas">
+                    <div class="icon">💡</div>
+                    <h3>Ide Konten</h3>
+                    <p>Plan konten 30 hari</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" id="form-container">
+            <!-- Form Competitor Analysis -->
+            <div id="form-competitor">
+                <h2 class="section-title">📊 Analisis Kompetitor</h2>
+
+                <div class="form-group">
+                    <label>Nama Brand</label>
+                    <input type="text" id="brand_name" placeholder="Contoh: @somethinc atau Somethinc">
+                </div>
+
+                <div class="form-group">
+                    <label>Platform</label>
+                    <select id="platform">
+                        <option value="Instagram">Instagram</option>
+                        <option value="TikTok">TikTok</option>
+                        <option value="Twitter">Twitter/X</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Industri</label>
+                    <input type="text" id="industry" placeholder="Contoh: Skincare Indonesia, Fashion Streetwear">
+                </div>
+
+                <div class="posts-help">
+                    <strong>📌 Cara dapat Data Posts:</strong><br>
+                    Buka Instagram kompetitor → Catat 3-5 post terbaru dengan caption-nya.<br>
+                    Bisa juga copy dari tab "Posts" atau "Tagged".
+                </div>
+
+                <div class="form-group">
+                    <label>Data Posts (Opsional)</label>
+                    <textarea id="posts_data" placeholder="Format:
+POST 1: [Caption post 1]
+Likes: 5000 | Comments: 200 | Saves: 100 | Format: Carousel
+
+POST 2: [Caption post 2]
+Likes: 8000 | Comments: 400 | Saves: 200 | Format: Reels
+
+(Dapat langsung dari profil Instagram kompetitor)"></textarea>
+                    <small>Kosongkan jika tidak punya data. AI akan memberikan analisis umum.</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Avg Likes per Post (Opsional)</label>
+                    <input type="text" id="avg_likes" placeholder="Contoh: 5000">
+                </div>
+
+                <div class="form-group">
+                    <label>Engagement Rate % (Opsional)</label>
+                    <input type="text" id="engagement_rate" placeholder="Contoh: 4.5">
+                </div>
+            </div>
+
+            <!-- Form Caption -->
+            <div id="form-caption" style="display:none;">
+                <h2 class="section-title">✍️ Variasi Caption</h2>
+
+                <div class="form-group">
+                    <label>Nama Brand</label>
+                    <input type="text" id="caption_brand" placeholder="Contoh: Wardah, Somethinc, Emina">
+                </div>
+
+                <div class="form-group">
+                    <label>Brand Voice</label>
+                    <input type="text" id="brand_voice" placeholder="Contoh: Friendly, fun, educational, professional">
+                </div>
+
+                <div class="form-group">
+                    <label>Target Audiens</label>
+                    <input type="text" id="target_audience" placeholder="Contoh: Perempuan 20-30 tahun di Indonesia">
+                </div>
+
+                <div class="form-group">
+                    <label>Topik Caption</label>
+                    <input type="text" id="topic" placeholder="Contoh: Benefits of Vitamin C untuk kulit">
+                </div>
+
+                <div class="form-group">
+                    <label>Pesan Utama</label>
+                    <textarea id="primary_message" placeholder="Apa message utama yang ingin disampaikan..."></textarea>
+                </div>
+            </div>
+
+            <!-- Form Ideas -->
+            <div id="form-ideas" style="display:none;">
+                <h2 class="section-title">💡 Ide Konten</h2>
+
+                <div class="form-group">
+                    <label>Nama Brand</label>
+                    <input type="text" id="ideas_brand" placeholder="Contoh: Kopi Nusantara">
+                </div>
+
+                <div class="form-group">
+                    <label>Industri</label>
+                    <input type="text" id="ideas_industry" placeholder="Contoh: Coffee & Cafe Indonesia">
+                </div>
+
+                <div class="form-group">
+                    <label>Target Audiens</label>
+                    <input type="text" id="ideas_audience" placeholder="Contoh: Young professionals, coffee enthusiasts">
+                </div>
+
+                <div class="form-group">
+                    <label>Brand Voice</label>
+                    <input type="text" id="ideas_voice" placeholder="Contoh: Premium but approachable, fun">
+                </div>
+
+                <div class="form-group">
+                    <label>Goal Utama</label>
+                    <input type="text" id="ideas_goal" placeholder="Contoh: Increase engagement, brand awareness">
+                </div>
+            </div>
+
+            <button class="btn" id="generate-btn" onclick="generateOutput()">
+                🚀 Generate Output
+            </button>
+        </div>
+
+        <div class="card" id="loading-card" style="display:none;">
+            <div class="loading show">
+                <div class="spinner"></div>
+                <p>Sedang generate output...</p>
+                <p style="font-size: 0.9em; color: #666;">Mohon tunggu sebentar</p>
+            </div>
+        </div>
+
+        <div class="card" id="result-card" style="display:none;">
+            <div class="result-header">
+                <h3>📤 Hasil Output</h3>
+                <div class="result-actions">
+                    <button class="btn-small btn-copy" onclick="copyResult()">📋 Copy</button>
+                    <button class="btn-small btn-download" onclick="downloadResult()">💾 Download</button>
+                </div>
+            </div>
+            <div class="result-content" id="result-content"></div>
+        </div>
+
+        <div class="footer">
+            <p>Made with ❤️ by <strong>AtapDigital</strong></p>
+            <p><a href="https://github.com/Atazyyy/AtapDigital-AI-Prompt-Library" target="_blank">View on GitHub</a></p>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">Copied to clipboard!</div>
+
+    <script>
+        let currentTool = 'competitor';
+        let generatedResult = '';
+
+        // Menu switching
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+
+                currentTool = this.dataset.tool;
+
+                document.getElementById('form-competitor').style.display = currentTool === 'competitor' ? 'block' : 'none';
+                document.getElementById('form-caption').style.display = currentTool === 'caption' ? 'block' : 'none';
+                document.getElementById('form-ideas').style.display = currentTool === 'ideas' ? 'block' : 'none';
+            });
+        });
+
+        async function generateOutput() {
+            const btn = document.getElementById('generate-btn');
+            btn.disabled = true;
+            btn.textContent = '⏳ Generating...';
+
+            document.getElementById('form-container').style.display = 'none';
+            document.getElementById('loading-card').style.display = 'block';
+            document.getElementById('result-card').style.display = 'none';
+
+            let context = {};
+            let promptFile = '';
+
+            if (currentTool === 'competitor') {
+                promptFile = 'PROMPTS/01_competitor_research/analyze_competitor.md';
+                context = {
+                    brand_name: document.getElementById('brand_name').value || 'Brand Example',
+                    platform: document.getElementById('platform').value,
+                    handle: document.getElementById('brand_name').value || 'Brand Example',
+                    industry: document.getElementById('industry').value || 'General',
+                    posts_data: document.getElementById('posts_data').value || 'Data tidak tersedia',
+                    avg_likes: document.getElementById('avg_likes').value || 'N/A',
+                    avg_comments: 'N/A',
+                    avg_saves: 'N/A',
+                    engagement_rate: document.getElementById('engagement_rate').value || 'N/A'
+                };
+            } else if (currentTool === 'caption') {
+                promptFile = 'PROMPTS/02_content_strategy/caption_variations.md';
+                context = {
+                    brand_name: document.getElementById('caption_brand').value || 'Brand Example',
+                    brand_voice: document.getElementById('brand_voice').value || 'Friendly, casual',
+                    target_audience: document.getElementById('target_audience').value || 'General audience',
+                    topic: document.getElementById('topic').value || 'Product showcase',
+                    format: 'Instagram',
+                    primary_message: document.getElementById('primary_message').value || 'Default message'
+                };
+            } else if (currentTool === 'ideas') {
+                promptFile = 'PROMPTS/02_content_strategy/generate_ideas.md';
+                context = {
+                    brand_name: document.getElementById('ideas_brand').value || 'Brand Example',
+                    industry: document.getElementById('ideas_industry').value || 'General',
+                    target_audience: document.getElementById('ideas_audience').value || 'General audience',
+                    brand_voice: document.getElementById('ideas_voice').value || 'Friendly',
+                    primary_goal: document.getElementById('ideas_goal').value || 'Increase engagement',
+                    campaign_period: 'Next 30 days',
+                    data_insights: 'Data belum tersedia',
+                    competitor_examples: 'Data belum tersedia',
+                    budget: 'Limited',
+                    team_capacity: '1 content creator',
+                    platform_priority: 'Instagram',
+                    theme_1: 'Education',
+                    theme_2: 'Lifestyle',
+                    theme_3: 'Behind the scenes',
+                    theme_4: 'Product showcase'
+                };
+            }
+
+            try {
+                // Call backend API
+                const response = await fetch('/api/generate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt_file: promptFile, context: context })
+                });
+
+                const data = await response.json();
+                generatedResult = data.result;
+
+                document.getElementById('loading-card').style.display = 'none';
+                document.getElementById('result-card').style.display = 'block';
+                document.getElementById('result-content').textContent = generatedResult;
+
+            } catch (error) {
+                // Demo mode - show placeholder
+                generatedResult = `Demo Mode: ${currentTool}\n\nSilakan jalankan script Python untuk generate output:\n\ncd "C:\\Users\\agnim\\Videos\\Agni Career\\Project\\Project NCL\\Project1"\npython demo_runner.py\n\nAtau hubungkan dengan backend API untuk fitur web-based.`;
+
+                document.getElementById('loading-card').style.display = 'none';
+                document.getElementById('result-card').style.display = 'block';
+                document.getElementById('result-content').textContent = generatedResult;
+            }
+
+            btn.disabled = false;
+            btn.textContent = '🚀 Generate Output';
+            document.getElementById('form-container').style.display = 'block';
+        }
+
+        function copyResult() {
+            navigator.clipboard.writeText(generatedResult);
+            showToast('Copied to clipboard!');
+        }
+
+        function downloadResult() {
+            const blob = new Blob([generatedResult], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `atapdigital_${currentTool}_${Date.now()}.md`;
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('Downloaded!');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+    </script>
+</body>
+</html>

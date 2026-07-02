@@ -1,3 +1,9 @@
-# Requirements
+# AtapDigital AI Prompt Library
 
-pip install anthropic python-dotenv
+# Core dependencies
+anthropic>=0.18.0
+python-dotenv>=1.0.0
+
+# Web server
+flask>=3.0.0
+flask-cors>=4.0.0
