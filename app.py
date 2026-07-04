@@ -50,7 +50,7 @@ def generate():
 
 if __name__ == '__main__':
     print("=" * 50)
-    print("AtapDigital AI Toolkit")
+    print("AI-Powered Social Media Toolkit")
     print("=" * 50)
     print("Starting server...")
     print("Open browser: http://localhost:5000")

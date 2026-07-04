@@ -1,8 +1,8 @@
-# 🎯 AtapDigital AI Prompt Library
+# 🎯 AI-Powered Social Media Toolkit for Agencies
 
-Koleksi prompt yang siap pakai untuk workflow social media agency — dirancang untuk riset kompetitor, strategi konten, pelaporan klien, dan pelatihan tim.
+Koleksi AI tools dan prompt yang siap pakai untuk workflow social media agency — dirancang untuk riset kompetitor, strategi konten, pelaporan klien, dan pelatihan tim.
 
-Dibuat sebagai portfolio project AI Specialist untuk mendemonstrasikan kemampuan **AI orchestration** dan **prompt engineering** dalam konteks social media marketing.
+Dibuat sebagai portfolio project AI Specialist untuk mendemonstrasikan kemampuan **AI orchestration**, **prompt engineering**, dan **automation** dalam konteks social media marketing agency.
 
 ---
 
