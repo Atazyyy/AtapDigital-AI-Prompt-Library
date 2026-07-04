@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Banners - AtapDigital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0f;
+            color: white;
+            padding: 40px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 40px;
+        }
+
+        .banner-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 32px;
+        }
+
+        .banner-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .banner-preview {
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .banner-preview img {
+            max-width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+        }
+
+        .banner-info {
+            padding: 20px;
+        }
+
+        .banner-name {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .banner-size {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 16px;
+        }
+
+        .banner-use {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .download-btn {
+            width: 100%;
+            padding: 12px 20px;
+            background: rgba(249, 115, 22, 0.1);
+            border: 1px solid rgba(249, 115, 22, 0.3);
+            border-radius: 10px;
+            color: #fb923c;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .download-btn:hover {
+            background: rgba(249, 115, 22, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        canvas {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 AtapDigital Banner Pack</h1>
+        <p class="subtitle">Download banners untuk portfolio, GitHub, LinkedIn, dan website</p>
+
+        <div class="banner-grid">
+            <!-- Hero Banner -->
+            <div class="banner-item">
+                <div class="banner-preview">
+                    <img src="banner-hero.svg" alt="Hero Banner" crossorigin="anonymous">
+                </div>
+                <div class="banner-info">
+                    <div class="banner-name">Hero Banner</div>
+                    <div class="banner-size">1200 × 630px</div>
+                    <div class="banner-use">GitHub README, LinkedIn posts, og:image</div>
+                    <button class="download-btn" onclick="downloadPNG('hero', 1200, 630)">
+                        📥 Download PNG
+                    </button>
+                </div>
+            </div>
+
+            <!-- Square Banner -->
+            <div class="banner-item">
+                <div class="banner-preview">
+                    <img src="banner-square.svg" alt="Square Banner" crossorigin="anonymous">
+                </div>
+                <div class="banner-info">
+                    <div class="banner-name">Square Banner</div>
+                    <div class="banner-size">1080 × 1080px</div>
+                    <div class="banner-use">Instagram post, Portfolio cards</div>
+                    <button class="download-btn" onclick="downloadPNG('square', 1080, 1080)">
+                        📥 Download PNG
+                    </button>
+                </div>
+            </div>
+
+            <!-- Wide Banner -->
+            <div class="banner-item">
+                <div class="banner-preview">
+                    <img src="banner-wide.svg" alt="Wide Banner" crossorigin="anonymous">
+                </div>
+                <div class="banner-info">
+                    <div class="banner-name">Wide Banner</div>
+                    <div class="banner-size">1920 × 600px</div>
+                    <div class="banner-use">Website header, Cover image</div>
+                    <button class="download-btn" onclick="downloadPNG('wide', 1920, 600)">
+                        📥 Download PNG
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card Banner -->
+            <div class="banner-item">
+                <div class="banner-preview">
+                    <img src="banner-card.svg" alt="Card Banner" crossorigin="anonymous">
+                </div>
+                <div class="banner-info">
+                    <div class="banner-name">Project Card</div>
+                    <div class="banner-size">600 × 400px</div>
+                    <div class="banner-use">Portfolio grid, Project showcase</div>
+                    <button class="download-btn" onclick="downloadPNG('card', 600, 400)">
+                        📥 Download PNG
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="canvas"></canvas>
+
+    <script>
+        function downloadPNG(name, width, height) {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+
+            canvas.width = width;
+            canvas.height = height;
+
+            // Create gradient background
+            const bgGradient = ctx.createLinearGradient(0, 0, width, height);
+            bgGradient.addColorStop(0, '#0a0a0f');
+            bgGradient.addColorStop(1, '#1a1a2e');
+            ctx.fillStyle = bgGradient;
+            ctx.fillRect(0, 0, width, height);
+
+            // Add glow effects
+            ctx.save();
+
+            // Glow 1 (top right)
+            const glow1 = ctx.createRadialGradient(width * 0.8, 0, 0, width * 0.8, 0, width * 0.5);
+            glow1.addColorStop(0, 'rgba(249, 115, 22, 0.15)');
+            glow1.addColorStop(1, 'rgba(249, 115, 22, 0)');
+            ctx.fillStyle = glow1;
+            ctx.fillRect(0, 0, width, height);
+
+            // Glow 2 (bottom left)
+            const glow2 = ctx.createRadialGradient(0, height, 0, 0, height, width * 0.4);
+            glow2.addColorStop(0, 'rgba(249, 115, 22, 0.1)');
+            glow2.addColorStop(1, 'rgba(249, 115, 22, 0)');
+            ctx.fillStyle = glow2;
+            ctx.fillRect(0, 0, width, height);
+
+            ctx.restore();
+
+            // Draw grid pattern
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.02)';
+            ctx.lineWidth = 1;
+            const gridSize = 50;
+            for (let x = 0; x <= width; x += gridSize) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, height);
+                ctx.stroke();
+            }
+            for (let y = 0; y <= height; y += gridSize) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(width, y);
+                ctx.stroke();
+            }
+
+            // Set text styles
+            ctx.textAlign = 'center';
+            ctx.fillStyle = 'white';
+
+            if (name === 'hero' || name === 'square') {
+                // Logo box
+                const boxSize = Math.min(width, height) * 0.15;
+                const boxX = width / 2 - boxSize / 2;
+                const boxY = height * 0.25 - boxSize / 2;
+                const radius = boxSize * 0.25;
+
+                ctx.fillStyle = 'rgba(249, 115, 22, 0.1)';
+                roundRect(ctx, boxX, boxY, boxSize, boxSize, radius);
+                ctx.fill();
+
+                ctx.strokeStyle = 'rgba(249, 115, 22, 0.3)';
+                ctx.lineWidth = 2;
+                roundRect(ctx, boxX, boxY, boxSize, boxSize, radius);
+                ctx.stroke();
+
+                // Icon emoji
+                ctx.font = `${boxSize * 0.5}px Arial`;
+                ctx.fillText('🎯', width / 2, boxY + boxSize * 0.65);
+
+                // Title
+                const titleSize = Math.min(width * 0.06, 72);
+                ctx.font = `800 ${titleSize}px Inter, Arial, sans-serif`;
+                ctx.fillText('AtapDigital', width / 2, height * 0.5);
+
+                // Subtitle
+                const subSize = Math.min(width * 0.025, 28);
+                ctx.font = `400 ${subSize}px Inter, Arial, sans-serif`;
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+                ctx.fillText('AI-Powered Social Media Toolkit', width / 2, height * 0.58);
+
+                // Badge
+                const badgeWidth = Math.min(width * 0.25, 280);
+                const badgeHeight = Math.min(height * 0.08, 56);
+                const badgeX = width / 2 - badgeWidth / 2;
+                const badgeY = height * 0.68;
+
+                ctx.fillStyle = 'rgba(249, 115, 22, 0.1)';
+                roundRect(ctx, badgeX, badgeY, badgeWidth, badgeHeight, badgeHeight / 2);
+                ctx.fill();
+
+                ctx.strokeStyle = 'rgba(249, 115, 22, 0.3)';
+                ctx.lineWidth = 1;
+                roundRect(ctx, badgeX, badgeY, badgeWidth, badgeHeight, badgeHeight / 2);
+                ctx.stroke();
+
+                // Badge dot
+                ctx.beginPath();
+                ctx.arc(badgeX + 25, badgeY + badgeHeight / 2, 6, 0, Math.PI * 2);
+                ctx.fillStyle = '#f97316';
+                ctx.fill();
+
+                // Badge text
+                ctx.font = `500 ${Math.min(width * 0.015, 18)}px Inter, Arial, sans-serif`;
+                ctx.fillStyle = '#fb923c';
+                ctx.fillText('Powered by Claude AI', width / 2, badgeY + badgeHeight / 2 + 6);
+
+                // Features for hero
+                if (name === 'hero') {
+                    ctx.font = `400 ${Math.min(width * 0.013, 16)}px Inter, Arial, sans-serif`;
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+                    const featY = height * 0.9;
+                    ctx.fillText('📊 Competitor Research', width * 0.25, featY);
+                    ctx.fillText('✍️ Caption Generator', width * 0.5, featY);
+                    ctx.fillText('💡 Content Ideas', width * 0.75, featY);
+                }
+            }
+
+            if (name === 'wide') {
+                // Left side layout
+                const startX = width * 0.08;
+                const centerY = height / 2;
+
+                // Logo icon
+                const iconSize = height * 0.2;
+                ctx.fillStyle = 'rgba(249, 115, 22, 0.15)';
+                roundRect(ctx, startX, centerY - iconSize / 2 - 40, iconSize, iconSize, iconSize * 0.25);
+                ctx.fill();
+                ctx.strokeStyle = 'rgba(249, 115, 22, 0.3)';
+                ctx.lineWidth = 2;
+                roundRect(ctx, startX, centerY - iconSize / 2 - 40, iconSize, iconSize, iconSize * 0.25);
+                ctx.stroke();
+                ctx.font = `${iconSize * 0.5}px Arial`;
+                ctx.fillText('🎯', startX + iconSize / 2, centerY);
+
+                // Title
+                ctx.font = `700 ${height * 0.12}px Inter, Arial, sans-serif`;
+                ctx.fillStyle = 'white';
+                ctx.textAlign = 'left';
+                ctx.fillText('AtapDigital', startX + iconSize + 30, centerY + 5);
+
+                // Subtitle
+                ctx.font = `400 ${height * 0.045}px Inter, Arial, sans-serif`;
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+                ctx.fillText('AI-Powered Social Media Toolkit', startX + iconSize + 30, centerY + 50);
+
+                // Feature badges
+                ctx.font = `500 ${height * 0.035}px Inter, Arial, sans-serif`;
+                ctx.fillStyle = '#fb923c';
+                const badgeY = centerY + 90;
+                const badges = ['📊 Competitor Research', '✍️ Caption Generator', '💡 Content Ideas'];
+                let badgeX = startX + iconSize + 30;
+                badges.forEach((badge, i) => {
+                    const badgeW = 180;
+                    ctx.fillStyle = 'rgba(249, 115, 22, 0.1)';
+                    roundRect(ctx, badgeX, badgeY, badgeW, 42, 21);
+                    ctx.fill();
+                    ctx.strokeStyle = 'rgba(249, 115, 22, 0.2)';
+                    ctx.lineWidth = 1;
+                    roundRect(ctx, badgeX, badgeY, badgeW, 42, 21);
+                    ctx.stroke();
+                    ctx.fillText(badge, badgeX + badgeW / 2, badgeY + 27);
+                    badgeX += badgeW + 20;
+                });
+            }
+
+            if (name === 'card') {
+                // Compact layout for card
+                ctx.font = '50px Arial';
+                ctx.fillText('🎯', width / 2, height * 0.35);
+
+                ctx.font = `700 ${height * 0.12}px Inter, Arial, sans-serif`;
+                ctx.fillText('AtapDigital', width / 2, height * 0.55);
+
+                ctx.font = `400 ${height * 0.06}px Inter, Arial, sans-serif`;
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+                ctx.fillText('AI Toolkit', width / 2, height * 0.68);
+
+                // Small badges
+                const tags = ['📊 Riset', '✍️ Caption', '💡 Ide'];
+                let tagX = width / 2 - (tags.length * 90) / 2;
+                tags.forEach(tag => {
+                    ctx.font = `500 ${height * 0.05}px Inter, Arial, sans-serif`;
+                    ctx.fillStyle = '#fb923c';
+                    ctx.fillText(tag, tagX + 45, height * 0.85);
+                    tagX += 100;
+                });
+            }
+
+            // Download
+            const link = document.createElement('a');
+            link.download = `atapdigital-banner-${name}-${width}x${height}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        function roundRect(ctx, x, y, width, height, radius) {
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+            ctx.lineTo(x + width, y + height - radius);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            ctx.lineTo(x + radius, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+            ctx.lineTo(x, y + radius);
+            ctx.quadraticCurveTo(x, y, x + radius, y);
+            ctx.closePath();
+        }
+    </script>
+</body>
+</html>
