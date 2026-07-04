@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AtapDigital AI Toolkit - Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.06);
+            --border-hover: rgba(255, 255, 255, 0.12);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.6);
+            --text-muted: rgba(255, 255, 255, 0.4);
+            --accent: #f97316;
+            --accent-glow: rgba(249, 115, 22, 0.15);
+            --success: #22c55e;
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.06);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Elegant Background */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(249, 115, 22, 0.15), transparent),
+                radial-gradient(ellipse 60% 40% at 100% 100%, rgba(249, 115, 22, 0.08), transparent),
+                var(--bg-primary);
+            z-index: -2;
+        }
+
+        /* Subtle Grid */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+            background-size: 64px 64px;
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+
+        .logo-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--accent-glow), rgba(249, 115, 22, 0.05));
+            border: 1px solid rgba(249, 115, 22, 0.2);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 0 40px var(--accent-glow);
+        }
+
+        .logo-text {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .tagline {
+            font-size: 18px;
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-bottom: 32px;
+        }
+
+        .demo-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            color: var(--success);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .demo-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        /* Main Demo Card */
+        .demo-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .demo-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 24px;
+            background: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .window-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .window-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .window-dot.red { background: #ff5f57; }
+        .window-dot.yellow { background: #ffbd2e; }
+        .window-dot.green { background: #28ca41; }
+
+        .demo-title {
+            flex: 1;
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* Tool Selection */
+        .tool-section {
+            padding: 32px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .section-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .tool-btn {
+            position: relative;
+            padding: 20px 16px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .tool-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+        }
+
+        .tool-btn.active {
+            background: rgba(249, 115, 22, 0.08);
+            border-color: rgba(249, 115, 22, 0.3);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .tool-btn.active::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .tool-emoji {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .tool-name {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .tool-desc {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* Form Section */
+        .form-section {
+            padding: 32px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 14px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 13px;
+            transition: all 0.2s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: rgba(249, 115, 22, 0.4);
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+        }
+
+        .input-hint {
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        /* Generate Button */
+        .generate-section {
+            padding: 32px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn-generate {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.2), rgba(249, 115, 22, 0.1));
+            border: 1px solid rgba(249, 115, 22, 0.3);
+            border-radius: 12px;
+            color: #fb923c;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .btn-generate::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-generate:hover::before {
+            left: 100%;
+        }
+
+        .btn-generate:hover {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.3), rgba(249, 115, 22, 0.2));
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(249, 115, 22, 0.3);
+        }
+
+        .btn-icon {
+            font-size: 18px;
+        }
+
+        /* Loading State */
+        .loading-overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .loading-overlay.show {
+            display: flex;
+        }
+
+        .loading-spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid rgba(249, 115, 22, 0.1);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .loading-model {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Output Section */
+        .output-section {
+            padding: 32px;
+            background: rgba(0, 0, 0, 0.15);
+            display: none;
+        }
+
+        .output-section.show {
+            display: block;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .output-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--success);
+        }
+
+        .output-label::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+        }
+
+        .output-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-action {
+            padding: 8px 14px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-action:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+            color: var(--text-primary);
+        }
+
+        .output-content {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 24px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-size: 13px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .output-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .output-content::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .output-content::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        /* Markdown Styling in Output */
+        .output-content h1,
+        .output-content h2,
+        .output-content h3 {
+            color: var(--text-primary);
+            margin: 20px 0 10px 0;
+            font-weight: 600;
+        }
+
+        .output-content h1 { font-size: 18px; color: var(--accent); }
+        .output-content h2 { font-size: 16px; }
+        .output-content h3 { font-size: 14px; }
+
+        .output-content ul,
+        .output-content ol {
+            margin: 10px 0;
+            padding-left: 24px;
+        }
+
+        .output-content li {
+            margin: 6px 0;
+        }
+
+        .output-content table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 16px 0;
+            font-size: 12px;
+        }
+
+        .output-content th,
+        .output-content td {
+            padding: 10px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: left;
+        }
+
+        .output-content th {
+            background: rgba(249, 115, 22, 0.1);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .output-content strong {
+            color: var(--text-primary);
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(249, 115, 22, 0.95);
+            color: white;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 500;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Features Section */
+        .features-section {
+            margin-top: 80px;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .features-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 48px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .feature-card {
+            padding: 28px;
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        .feature-name {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .feature-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 80px;
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .footer-text {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .footer-link {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .tool-grid,
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 40px 16px;
+            }
+
+            .demo-card {
+                border-radius: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    <div class="grid-bg"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <div class="logo-icon">🎯</div>
+                <span class="logo-text">AtapDigital</span>
+            </div>
+            <p class="tagline">AI-Powered Social Media Toolkit for Agencies</p>
+            <div class="demo-badge">Live Demo</div>
+        </header>
+
+        <!-- Main Demo Card -->
+        <div class="demo-card" style="position: relative;">
+            <!-- Header -->
+            <div class="demo-header">
+                <div class="window-controls">
+                    <div class="window-dot red"></div>
+                    <div class="window-dot yellow"></div>
+                    <div class="window-dot green"></div>
+                </div>
+                <div class="demo-title">atapdigital.ai — Interactive Demo</div>
+                <div style="width: 52px;"></div>
+            </div>
+
+            <!-- Tool Selection -->
+            <div class="tool-section">
+                <div class="section-label">Select Tool</div>
+                <div class="tool-grid">
+                    <div class="tool-btn active" data-tool="competitor">
+                        <div class="tool-emoji">📊</div>
+                        <div class="tool-name">Analisis Kompetitor</div>
+                        <div class="tool-desc">Deep dive analysis</div>
+                    </div>
+                    <div class="tool-btn" data-tool="caption">
+                        <div class="tool-emoji">✍️</div>
+                        <div class="tool-name">Caption Generator</div>
+                        <div class="tool-desc">Multi-style variations</div>
+                    </div>
+                    <div class="tool-btn" data-tool="ideas">
+                        <div class="tool-emoji">💡</div>
+                        <div class="tool-name">Content Ideas</div>
+                        <div class="tool-desc">30-day calendar</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="form-section">
+                <div class="section-label">Enter Details</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Brand Name</label>
+                        <input type="text" class="form-input" id="brand" value="@somethinc" placeholder="Enter brand name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Industry</label>
+                        <input type="text" class="form-input" id="industry" value="Skincare Indonesia" placeholder="e.g., Skincare">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Platform</label>
+                        <input type="text" class="form-input" id="platform" value="Instagram" placeholder="Instagram/TikTok">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Engagement Rate</label>
+                        <input type="text" class="form-input" id="engagement" value="4.5%" placeholder="e.g., 4.5%">
+                    </div>
+                    <div class="form-group full">
+                        <label class="form-label">Posts Data</label>
+                        <textarea class="form-input form-textarea" id="posts">POST 1: [Educational carousel about skincare routine]
+Likes: 12K | Comments: 890 | Saves: 2.1K | Format: Carousel
+
+POST 2: [Product review with influencer]
+Likes: 8.5K | Comments: 420 | Saves: 890 | Format: Reels
+
+POST 3: [Behind the scenes content]
+Likes: 15K | Comments: 1.2K | Saves: 3.5K | Format: Reels</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Generate Button -->
+            <div class="generate-section">
+                <button class="btn-generate" onclick="generateDemo()">
+                    <span class="btn-icon">✨</span>
+                    <span>Generate with Claude AI</span>
+                </button>
+            </div>
+
+            <!-- Loading Overlay -->
+            <div class="loading-overlay" id="loading">
+                <div class="loading-spinner"></div>
+                <div class="loading-text">Generating analysis...</div>
+                <div class="loading-model">claude-sonnet-4-20250514</div>
+            </div>
+
+            <!-- Output -->
+            <div class="output-section" id="output-section">
+                <div class="output-header">
+                    <div class="output-label">Analysis Complete</div>
+                    <div class="output-actions">
+                        <button class="btn-action" onclick="copyOutput()">📋 Copy</button>
+                        <button class="btn-action" onclick="downloadPDF()">📄 PDF</button>
+                        <button class="btn-action" onclick="downloadMD()">📝 MD</button>
+                    </div>
+                </div>
+                <div class="output-content" id="output-content"></div>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="features-section">
+            <h2 class="features-title">Built for Social Media Teams</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <div class="feature-name">Purpose-Built Prompts</div>
+                    <div class="feature-desc">Optimized templates for social media workflow. No prompt engineering needed.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-name">Instant Output</div>
+                    <div class="feature-desc">Generate ready-to-use reports, captions, and content calendars in seconds.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-name">Export Ready</div>
+                    <div class="feature-desc">PDF reports for clients, Markdown for docs, plain text for any platform.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <div class="feature-name">Template Library</div>
+                    <div class="feature-desc">12+ specialized templates for competitor research, caption variations, and more.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔌</div>
+                    <div class="feature-name">API Integration</div>
+                    <div class="feature-desc">Built on Flask with REST API. Easy to integrate with existing tools.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <div class="feature-name">Claude Powered</div>
+                    <div class="feature-desc">Powered by Anthropic's Claude for high-quality, consistent outputs.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p class="footer-text">
+                Made with ❤️ by <a href="https://github.com/Atazyyy" class="footer-link">@Atazyyy</a> ·
+                <a href="https://github.com/Atazyyy/AtapDigital-AI-Prompt-Library" class="footer-link">View on GitHub</a>
+            </p>
+        </footer>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">Copied to clipboard!</div>
+
+    <script>
+        // Demo output for the competitor analysis
+        const demoOutput = `# 📊 Analisis Kompetitor: @somethinc
+
+## 1. 📌 Profile Overview
+
+| Aspek | Insight |
+|-------|---------|
+| Brand Positioning | Clean beauty, scientifically-backed skincare |
+| Tone & Voice | Casual, friendly, educational |
+| Target Audience | Females 18-30, skincare beginners to intermediates |
+| Content Theme | Education + Product showcases |
+
+---
+
+## 2. 🎯 Content Strategy Analysis
+
+### Content Mix Distribution
+
+| Content Type | Est. % | Evidence |
+|--------------|--------|----------|
+| Educational | 45% | Tutorial carousels, tips posts |
+| Entertainment | 25% | Trending audio, relatable content |
+| Promotional | 20% | Product launches, reviews |
+| BTS | 10% | Behind the scenes, team content |
+
+### Posting Pattern
+
+| Aspek | Observasi |
+|-------|----------|
+| Frequency | 1-2x daily |
+| Peak Hours | 19:00-21:00 WIB |
+| Format Preference | Reels (60%), Carousel (30%), Static (10%) |
+
+---
+
+## 3. 📈 Engagement Analysis
+
+### Top Performing Content
+
+**Post #1:** Educational carousel (15K likes)
+- **Why:** Solves real problem with actionable tips
+- **Key Takeaway:** Educational content drives highest engagement
+
+**Post #2:** BTS content (15K likes)
+- **Why:** Humanizes brand, builds trust
+- **Key Takeaway:** Authenticity resonates with audience
+
+---
+
+## 4. 💡 Strategic Insights
+
+### Key Findings
+
+1. **Educational content is king** - Consistently outperforms promotional
+2. **Reels drive reach** - 2x more reach than static posts
+3. **Consistency matters** - Active daily posting maintains engagement
+4. **Community engagement** - High comment interaction strategy
+
+---
+
+## 5. 📋 Recommendations
+
+### Immediate Actions
+
+- [ ] Increase educational carousel frequency to 3x/week
+- [ ] Leverage trending audio in Reels
+- [ ] Reply to all comments within 1 hour
+- [ ] Cross-post BTS content to TikTok
+
+### Content Ideas
+
+| Idea | Format | Why It Could Work |
+|------|--------|------------------|
+| Skincare myth-busting | Carousel | High share potential |
+| "A day with..." series | Reels | Humanizes brand |
+| Product comparison | Carousel | Drives consideration |
+
+---
+
+*Generated by AtapDigital AI Toolkit*`;
+
+        // Tool switching
+        document.querySelectorAll('.tool-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        function generateDemo() {
+            const loading = document.getElementById('loading');
+            const outputSection = document.getElementById('output-section');
+            const outputContent = document.getElementById('output-content');
+
+            // Hide output, show loading
+            outputSection.classList.remove('show');
+            loading.classList.add('show');
+
+            // Simulate AI generation
+            setTimeout(() => {
+                loading.classList.remove('show');
+                outputContent.innerHTML = parseMarkdown(demoOutput);
+                outputSection.classList.add('show');
+            }, 2000);
+        }
+
+        function parseMarkdown(text) {
+            let html = text;
+
+            // Tables
+            const tableRegex = /\|(.+)\|\n\|[-| ]+\|\n((?:\|.+\|\n?)+)/g;
+            html = html.replace(tableRegex, (match, header, body) => {
+                const headers = header.split('|').filter(h => h.trim()).map(h => h.trim());
+                const rows = body.trim().split('\n').map(row =>
+                    row.split('|').filter(c => c.trim()).map(c => c.trim())
+                );
+                let tableHtml = '<table>';
+                tableHtml += '<thead><tr>';
+                headers.forEach(h => tableHtml += `<th>${h}</th>`);
+                tableHtml += '</tr></thead><tbody>';
+                rows.forEach(row => {
+                    tableHtml += '<tr>';
+                    row.forEach(cell => tableHtml += `<td>${cell}</td>`);
+                    tableHtml += '</tr>';
+                });
+                tableHtml += '</tbody></table>';
+                return tableHtml;
+            });
+
+            // Headers
+            html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+            html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+            html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+
+            // Bold
+            html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+
+            // Lists
+            html = html.replace(/^- (.+)$/gm, '<li>$1</li>');
+            html = html.replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>');
+
+            // Horizontal rule
+            html = html.replace(/^---$/gm, '<hr style="border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 20px 0;">');
+
+            // Line breaks
+            html = html.replace(/\n\n/g, '</p><p>');
+            html = '<p>' + html + '</p>';
+            html = html.replace(/<p><\/p>/g, '');
+            html = html.replace(/<p>\s*<\/p>/g, '');
+            html = html.replace(/<p>(<[hulhr])/g, '$1');
+            html = html.replace(/(<\/[hul][^>]*>)<\/p>/g, '$1');
+            html = html.replace(/<hr/g, '<hr');
+
+            return html;
+        }
+
+        function copyOutput() {
+            navigator.clipboard.writeText(demoOutput);
+            showToast('Copied to clipboard!');
+        }
+
+        function downloadPDF() {
+            const content = parseMarkdown(demoOutput);
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>AtapDigital - Competitor Analysis</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; padding: 50px; max-width: 800px; margin: 0 auto; line-height: 1.7; color: #1a1a2e; }
+        h1 { color: #ea580c; font-size: 22px; margin: 20px 0 10px; }
+        h2 { color: #1a1a2e; font-size: 16px; margin: 18px 0 8px; }
+        h3 { color: #374151; font-size: 14px; margin: 14px 0 6px; }
+        p { margin: 8px 0; }
+        ul { margin: 8px 0 8px 20px; }
+        li { margin: 4px 0; }
+        table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 13px; }
+        th, td { border: 1px solid #e5e7eb; padding: 10px 12px; text-align: left; }
+        th { background: #fff7ed; color: #ea580c; }
+        hr { border: none; border-top: 1px solid #e5e7eb; margin: 20px 0; }
+        .header { text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #ea580c; }
+        .header h1 { font-size: 26px; }
+        .footer { margin-top: 40px; text-align: center; font-size: 12px; color: #9ca3af; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎯 AtapDigital</h1>
+        <p>AI-Powered Social Media Analysis</p>
+    </div>
+    <div class="content">${content}</div>
+    <div class="footer">Generated by AtapDigital AI Toolkit · github.com/Atazyyy</div>
+</body>
+</html>`);
+            printWindow.document.close();
+            setTimeout(() => printWindow.print(), 300);
+        }
+
+        function downloadMD() {
+            const blob = new Blob([demoOutput], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'competitor-analysis.md';
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('Downloaded as Markdown!');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+    </script>
+</body>
+</html>
