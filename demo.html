@@ -519,6 +519,26 @@
             border-radius: 3px;
         }
 
+        /* Form Sections - Tool Specific */
+        .form-section {
+            padding: 32px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .form-content {
+            display: none;
+        }
+
+        .form-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         /* Markdown Styling in Output */
         .output-content h1,
         .output-content h2,
@@ -730,29 +750,27 @@
                 </div>
             </div>
 
-            <!-- Form -->
+            <!-- Form Section -->
             <div class="form-section">
-                <div class="section-label">Enter Details</div>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label class="form-label">Brand Name</label>
-                        <input type="text" class="form-input" id="brand" value="@somethinc" placeholder="Enter brand name">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Industry</label>
-                        <input type="text" class="form-input" id="industry" value="Skincare Indonesia" placeholder="e.g., Skincare">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Platform</label>
-                        <input type="text" class="form-input" id="platform" value="Instagram" placeholder="Instagram/TikTok">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Engagement Rate</label>
-                        <input type="text" class="form-input" id="engagement" value="4.5%" placeholder="e.g., 4.5%">
-                    </div>
-                    <div class="form-group full">
-                        <label class="form-label">Posts Data</label>
-                        <textarea class="form-input form-textarea" id="posts">POST 1: [Educational carousel about skincare routine]
+                <!-- Competitor Form -->
+                <div class="form-content active" id="form-competitor">
+                    <div class="section-label">📊 Competitor Analysis</div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Brand Name</label>
+                            <input type="text" class="form-input" id="brand" value="@somethinc" placeholder="e.g., @somethinc">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Platform</label>
+                            <input type="text" class="form-input" id="platform" value="Instagram" placeholder="Instagram/TikTok">
+                        </div>
+                        <div class="form-group full">
+                            <label class="form-label">Industry</label>
+                            <input type="text" class="form-input" id="industry" value="Skincare Indonesia" placeholder="e.g., Skincare">
+                        </div>
+                        <div class="form-group full">
+                            <label class="form-label">Posts Data</label>
+                            <textarea class="form-input form-textarea" id="posts">POST 1: [Educational carousel about skincare routine]
 Likes: 12K | Comments: 890 | Saves: 2.1K | Format: Carousel
 
 POST 2: [Product review with influencer]
@@ -760,6 +778,77 @@ Likes: 8.5K | Comments: 420 | Saves: 890 | Format: Reels
 
 POST 3: [Behind the scenes content]
 Likes: 15K | Comments: 1.2K | Saves: 3.5K | Format: Reels</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Avg Likes</label>
+                            <input type="text" class="form-input" id="avg_likes" value="10K" placeholder="e.g., 10K">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Engagement Rate</label>
+                            <input type="text" class="form-input" id="engagement" value="4.5%" placeholder="e.g., 4.5%">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Caption Form -->
+                <div class="form-content" id="form-caption">
+                    <div class="section-label">✍️ Caption Generator</div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Brand Name</label>
+                            <input type="text" class="form-input" value="Wardah" placeholder="e.g., Wardah">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Brand Voice</label>
+                            <input type="text" class="form-input" value="Friendly, empowering" placeholder="e.g., Friendly, fun">
+                        </div>
+                        <div class="form-group full">
+                            <label class="form-label">Target Audience</label>
+                            <input type="text" class="form-input" value="Perempuan Indonesia 20-35 tahun" placeholder="e.g., Perempuan 20-30 tahun">
+                        </div>
+                        <div class="form-group full">
+                            <label class="form-label">Content Topic</label>
+                            <input type="text" class="form-input" value="Benefits of Vitamin C for Skin" placeholder="e.g., Benefits of Vitamin C">
+                        </div>
+                        <div class="form-group full">
+                            <label class="form-label">Primary Message</label>
+                            <textarea class="form-input form-textarea" placeholder="Pesan utama yang ingin disampaikan...">Vitamin C adalah antioxidant yang membantu brightening kulit, melindungi dari UV damage, danboost collagen production. Cocok untuk semua jenis kulit.</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ideas Form -->
+                <div class="form-content" id="form-ideas">
+                    <div class="section-label">💡 Content Strategy</div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Brand Name</label>
+                            <input type="text" class="form-input" value="Kopi Nusantara" placeholder="e.g., Kopi Nusantara">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Industry</label>
+                            <input type="text" class="form-input" value="Coffee & Cafe" placeholder="e.g., Coffee & Cafe">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Target Audience</label>
+                            <input type="text" class="form-input" value="Young professionals 25-40" placeholder="e.g., Young professionals">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Brand Voice</label>
+                            <input type="text" class="form-input" value="Premium, approachable" placeholder="e.g., Premium, approachable">
+                        </div>
+                        <div class="form-group full">
+                            <label class="form-label">Primary Goal</label>
+                            <input type="text" class="form-input" value="Increase brand awareness & engagement" placeholder="e.g., Increase engagement">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Campaign Period</label>
+                            <input type="text" class="form-input" value="30 Days" placeholder="e.g., 30 Days">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Budget</label>
+                            <input type="text" class="form-input" value="Limited (solo creator)" placeholder="e.g., Limited">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -843,8 +932,11 @@ Likes: 15K | Comments: 1.2K | Saves: 3.5K | Format: Reels</textarea>
     <div class="toast" id="toast">Copied to clipboard!</div>
 
     <script>
-        // Demo output for the competitor analysis
-        const demoOutput = `# 📊 Analisis Kompetitor: @somethinc
+        let currentTool = 'competitor';
+
+        // Demo outputs for each tool
+        const demoOutputs = {
+            competitor: `# 📊 Analisis Kompetitor: @somethinc
 
 ## 1. 📌 Profile Overview
 
@@ -852,7 +944,7 @@ Likes: 15K | Comments: 1.2K | Saves: 3.5K | Format: Reels</textarea>
 |-------|---------|
 | Brand Positioning | Clean beauty, scientifically-backed skincare |
 | Tone & Voice | Casual, friendly, educational |
-| Target Audience | Females 18-30, skincare beginners to intermediates |
+| Target Audience | Females 18-30, skincare beginners |
 | Content Theme | Education + Product showcases |
 
 ---
@@ -866,7 +958,7 @@ Likes: 15K | Comments: 1.2K | Saves: 3.5K | Format: Reels</textarea>
 | Educational | 45% | Tutorial carousels, tips posts |
 | Entertainment | 25% | Trending audio, relatable content |
 | Promotional | 20% | Product launches, reviews |
-| BTS | 10% | Behind the scenes, team content |
+| BTS | 10% | Behind the scenes content |
 
 ### Posting Pattern
 
@@ -888,47 +980,193 @@ Likes: 15K | Comments: 1.2K | Saves: 3.5K | Format: Reels</textarea>
 
 **Post #2:** BTS content (15K likes)
 - **Why:** Humanizes brand, builds trust
-- **Key Takeaway:** Authenticity resonates with audience
 
 ---
 
 ## 4. 💡 Strategic Insights
 
-### Key Findings
-
 1. **Educational content is king** - Consistently outperforms promotional
 2. **Reels drive reach** - 2x more reach than static posts
 3. **Consistency matters** - Active daily posting maintains engagement
-4. **Community engagement** - High comment interaction strategy
 
 ---
 
 ## 5. 📋 Recommendations
-
-### Immediate Actions
 
 - [ ] Increase educational carousel frequency to 3x/week
 - [ ] Leverage trending audio in Reels
 - [ ] Reply to all comments within 1 hour
 - [ ] Cross-post BTS content to TikTok
 
-### Content Ideas
+---
 
-| Idea | Format | Why It Could Work |
-|------|--------|------------------|
-| Skincare myth-busting | Carousel | High share potential |
-| "A day with..." series | Reels | Humanizes brand |
-| Product comparison | Carousel | Drives consideration |
+*Generated by AtapDigital AI Toolkit*`,
+
+            caption: `# ✍️ Caption Variations: Wardah
+
+## Topic: Benefits of Vitamin C for Skin
 
 ---
 
-*Generated by AtapDigital AI Toolkit*`;
+### Variant A: 📚 The Educator
+
+**Angle:** Mengajarkan sesuatu yang valuable
+
+Tahukah kamu kalau Vitamin C adalah salah satu bahan skincare yang paling banyak diteliti?
+
+Ini fakta-fakta yang mungkin belum kamu tau:
+
+• **Brightening** - Menghambat produksi melanin, jadi noda hitam & hiperpigmentasi pelan-pelan pudar
+
+• **Collagen Booster** - Merangsang produksi collagen, kulit jadi lebih plump & kenyal
+
+• **UV Protection** - Bukan pengganti sunscreen, tapi bantu neutralize radikal bebas dari UV
+
+• **Anti-aging** - Kurangi tampilan garis halus & kerutan
+
+Pakai Vitamin C yang stabil (L-Ascorbic Acid + Ferulic Acid) untuk hasil maksimal! 💛
+
+---
+
+### Variant B: 🎭 The Storyteller
+
+**Angle:** Cerita personal/relatable
+
+Dulu aku pikir skincare mahal = skincare bagus.
+
+Lalu aku coba Vitamin C Wardah...
+
+3 minggu kemudian:
+
+• Noda hitam dari pasca jerawatan mulai pudar
+• Kulit看起来 lebih cerah, bukan putih tapi SEHAT
+• Teteori tetes sunscreen berkurang
+
+Sekarang? Vitamin C jadi step yang GA BOLONG di routine aku.
+
+Kalian juga pernah merasakan transformasi yang sama?
+
+Share di kolom komentar! 👇
+
+---
+
+### Variant C: 💬 The Conversation Starter
+
+**Angle:** Mulai conversation
+
+HONEST QUESTION:
+
+Kamu pakai Vitamin C nggak?
+
+Kalau iya, merk apa?
+Bapak udah berapa lama?
+Ngerasain hasilnya belum?
+
+Soalnya aku udah 3 bulan pakai Wardah dan...
+
+EH GAK NYANGKA ini works buat noda hitam aku 😭
+
+Kulit sekarang:
+
+✨ Lebih cerah merata
+✨ Noda bekas jerawat pudar
+✨ Glowing tanpa filter
+
+Ada yang sama? 👇
+
+---
+
+*Generated by AtapDigital AI Toolkit*`,
+
+            ideas: `# 💡 Content Ideas: Kopi Nusantara
+
+## Campaign Period: 30 Days
+
+---
+
+## 🎯 Content Pillar Framework
+
+| Pillar | Focus | % of Content | Why It Matters |
+|--------|-------|--------------|---------------|
+| Educate | Coffee knowledge | 30% | Build authority |
+| Entertain | Relatable content | 30% | Stop the scroll |
+| Inspire | Lifestyle integration | 20% | Brand love |
+| Convert | Products & promos | 20% | Drive sales |
+
+---
+
+## 💡 Content Ideas by Pillar
+
+### 🎯 Pillar 1: [EDUCATE] - Coffee Knowledge
+
+| # | Idea | Format | Hook |
+|---|------|--------|------|
+| 1 | "5 Jenis Kopi Indonesia" | Carousel | "Kamu tau nggak?" |
+| 2 | "Bedanya Arabica vs Robusta" | Reels | Side-by-side comparison |
+| 3 | "Cara pilih biji kopi" | Carousel | "Jangan asal beli" |
+
+### 🎯 Pillar 2: [ENTERTAIN] - Relatable
+
+| # | Idea | Format | Hook |
+|---|------|--------|------|
+| 1 | "Warga +62 ngopi" | Reels | Trending audio |
+| 2 | "Morning person vs Night owl" | Reels | Coffee edition |
+| 3 | "Ngopi tapi..." | Reels | Relatable scenarios |
+
+### 🎯 Pillar 3: [INSPIRE] - Lifestyle
+
+| # | Idea | Format | Story |
+|---|------|--------|-------|
+| 1 | "Ngopi di pinggir sawah" | Video | Sunrise vibes |
+| 2 | "My morning ritual" | Reels | Aesthetic setup |
+
+---
+
+## 📆 Week 1 Content Calendar
+
+| Day | Content | Pillar | Format |
+|-----|---------|--------|--------|
+| Mon | 5 Jenis Kopi Indonesia | Educate | Carousel |
+| Tue | Morning ritual | Entertain | Reels |
+| Wed | Product feature | Convert | Static |
+| Thu | Ngopi tapi... | Entertain | Reels |
+| Fri | Coffee tips | Educate | Carousel |
+| Sat | Behind the scenes | Inspire | Story |
+| Sun | Community post | Engage | User content |
+
+---
+
+## 🎬 Spotlight: "Ngopi Story" Series
+
+**Concept:** Mini documentary style ngopi di berbagai tempat Indonesia
+
+**Format:** 60 detik Reels
+**Hook:** "Ngopi di [tempat random]..."
+**Tone:** Calm, aesthetic, ASMR vibes
+
+---
+
+*Generated by AtapDigital AI Toolkit*`
+        };
 
         // Tool switching
         document.querySelectorAll('.tool-btn').forEach(btn => {
             btn.addEventListener('click', function() {
+                // Update active state
                 document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
+
+                // Get tool name
+                currentTool = this.dataset.tool;
+
+                // Hide all forms
+                document.querySelectorAll('.form-content').forEach(f => f.classList.remove('active'));
+
+                // Show selected form
+                document.getElementById('form-' + currentTool).classList.add('active');
+
+                // Hide output when switching tools
+                document.getElementById('output-section').classList.remove('show');
             });
         });
 
@@ -944,7 +1182,7 @@ Likes: 15K | Comments: 1.2K | Saves: 3.5K | Format: Reels</textarea>
             // Simulate AI generation
             setTimeout(() => {
                 loading.classList.remove('show');
-                outputContent.innerHTML = parseMarkdown(demoOutput);
+                outputContent.innerHTML = parseMarkdown(demoOutputs[currentTool]);
                 outputSection.classList.add('show');
             }, 2000);
         }
@@ -1000,19 +1238,24 @@ Likes: 15K | Comments: 1.2K | Saves: 3.5K | Format: Reels</textarea>
         }
 
         function copyOutput() {
-            navigator.clipboard.writeText(demoOutput);
+            navigator.clipboard.writeText(demoOutputs[currentTool]);
             showToast('Copied to clipboard!');
         }
 
         function downloadPDF() {
-            const content = parseMarkdown(demoOutput);
+            const content = parseMarkdown(demoOutputs[currentTool]);
+            const toolNames = {
+                competitor: 'Competitor Analysis',
+                caption: 'Caption Generator',
+                ideas: 'Content Ideas'
+            };
             const printWindow = window.open('', '_blank');
             printWindow.document.write(`
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>AtapDigital - Competitor Analysis</title>
+    <title>AtapDigital - ${toolNames[currentTool]}</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', sans-serif; padding: 50px; max-width: 800px; margin: 0 auto; line-height: 1.7; color: #1a1a2e; }
@@ -1028,13 +1271,15 @@ Likes: 15K | Comments: 1.2K | Saves: 3.5K | Format: Reels</textarea>
         hr { border: none; border-top: 1px solid #e5e7eb; margin: 20px 0; }
         .header { text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #ea580c; }
         .header h1 { font-size: 26px; }
+        .badge { background: #fff7ed; color: #ea580c; padding: 8px 16px; border-radius: 20px; display: inline-block; margin-top: 10px; font-size: 13px; }
         .footer { margin-top: 40px; text-align: center; font-size: 12px; color: #9ca3af; }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>🎯 AtapDigital</h1>
-        <p>AI-Powered Social Media Analysis</p>
+        <p>AI-Powered Social Media Toolkit</p>
+        <div class="badge">${toolNames[currentTool]}</div>
     </div>
     <div class="content">${content}</div>
     <div class="footer">Generated by AtapDigital AI Toolkit · github.com/Atazyyy</div>
@@ -1045,11 +1290,16 @@ Likes: 15K | Comments: 1.2K | Saves: 3.5K | Format: Reels</textarea>
         }
 
         function downloadMD() {
-            const blob = new Blob([demoOutput], { type: 'text/markdown' });
+            const filenames = {
+                competitor: 'competitor-analysis.md',
+                caption: 'caption-variations.md',
+                ideas: 'content-ideas.md'
+            };
+            const blob = new Blob([demoOutputs[currentTool]], { type: 'text/markdown' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'competitor-analysis.md';
+            a.download = filenames[currentTool];
             a.click();
             URL.revokeObjectURL(url);
             showToast('Downloaded as Markdown!');
